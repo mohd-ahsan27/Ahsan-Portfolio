@@ -1,43 +1,61 @@
-// src/pages/Projects.jsx
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import bg_changer_img from "../Portfolio-Images/bg-changer.png";
+import ttt_img from "../Portfolio-Images/tic-tac-toe-img.png";
+import rps_img from "../Portfolio-Images/rock-paper-scissors.jfif";
+import seg_img from "../Portfolio-Images/email-generator.png";
+import portfolio_img from "../Portfolio-Images/portfolio-img.jfif";
 
+// Projects Data
 const projects = [
   {
-    title: "Portfolio Website",
-    description: "A multi-page personal portfolio built with React and Tailwind CSS.",
-    tech: ["React", "Tailwind", "Framer Motion"],
-    link: "https://github.com/monthahaider/My-Portfolio/",
-    image: "/Images/Portfolio.png", // place your image in public/images
-    details: "Includes animated routing, responsive design, and professional layout.",
+    title: "🔄 Background Changer",
+    description:
+      "A simple yet interactive web app built with HTML, CSS, and JavaScript. It features a button that, when clicked, changes the background color of the page to a randomly generated color. Each color change also displays its corresponding HEX value on screen.",
+    tech: ["HTML", "CSS", "JavaScript"],
+    demoLink: "https://bachground-changer-demo.netlify.app/",
+    codeLink: "https://github.com/mohd-ahsan27/background-changer",
+    image: bg_changer_img,
   },
   {
-    title: "MERN Blog App",
-    description: "A complete blog platform with backend authentication and CRUD.",
-    tech: ["MongoDB", "Express", "React", "Node.js"],
-    link: "https://github.com/monthahaider/mern-blog",
-    image: "/Images/blog.png",
-    details: "User registration, login, post creation/editing, and RESTful API.",
+    title: "❌⭕ Tic Tac Toe Game",
+    description:
+      "A clean and responsive Tic Tac Toe game built using HTML, Tailwind CSS, and JavaScript. The game updates and displays the score of Player X and Player O after each round. It includes two functional buttons: Reset – clears the board but keeps the score, and New Game – resets both the board and the scores.",
+    tech: ["HTML", "Tailwind CSS", "JavaScript"],
+    demoLink: "https://tic-tac-toe-demo-101.netlify.app/",
+    codeLink: "https://github.com/mohd-ahsan27/Tic-Tac-Toe-Game",
+    image: ttt_img,
   },
   {
-    title: "E-commerce Store",
-    description: "An online store with shopping cart, payment, and admin dashboard.",
-    tech: ["React", "Redux", "Firebase"],
-    link: "https://yourstore.com",
-    image: "/Images/ecommerce.png",
-    details: "Includes payment gateway, order tracking, and authentication.",
+    title: "✊🖐✌ Rock Paper Scissors Game",
+    description:
+      "A simple and interactive Rock Paper Scissors game built using HTML, Tailwind CSS, and JavaScript. The player selects between Rock, Paper, or Scissors to compete against a computer-generated choice, with the result displayed instantly.",
+    tech: ["HTML", "Tailwind CSS", "JavaScript"],
+    demoLink: "https://rock-paper-scissors-demo-link.netlify.app/",
+    codeLink: "https://github.com/mohd-ahsan27/Rock-Paper-Scissor-Game",
+    image: rps_img,
   },
   {
-    title: "Enquiry Management System",
-    description: "A MERN-based CRM to track and manage customer enquiries.",
-    tech: ["MongoDB", "Express", "React", "Node.js"],
-    link: "https://github.com/monthahaider/enquiry-system",
-    image: "/Images/enquiry.png",
-    details: "Add, edit, view, and delete enquiries with responsive admin UI.",
+    title: "💡 Smart Email Generator (Gemini AI)",
+    description:
+      "An intelligent email generator built using React, JavaScript, and Tailwind CSS, powered by Google's Gemini API. Users can select an email type (e.g., job application, complaint, thank-you) from a dropdown and generate professional emails instantly. The app also includes:\n\n✍️ Generate, 🔁 Regenerate, 📋 Copy, and ♻️ Reset buttons\n\n📂 Back/Forward navigation to review previously generated emails\n\n📱 Fully responsive UI for smooth use across devices.",
+    tech: ["React JS", "Tailwind CSS", "JavaScript", "Node.JS", "Express.JS", "Gemini API"],
+    demoLink: "https://smart-email-generator-ai-demo-link.netlify.app/",
+    codeLink: "https://github.com/mohd-ahsan27/Email-Generator-Gemini-API-",
+    image: seg_img,
   },
-  // 🔽 Add your real projects below by copying the structure
+  {
+    title: "Responsive Portfolio UI Design",
+    description:
+      "A modern and responsive portfolio UI built using React JS and Tailwind CSS. It features reusable React components, smooth scroll animations, and a dynamic image slider to showcase projects or testimonials. Designed to offer a professional and interactive user experience across all devices.",
+    tech: ["React JS", "Tailwind CSS", "JavaScript", "Image Slider"],
+    demoLink: "https://portfolio-ui-design-demo.netlify.app/",
+    codeLink: "https://github.com/mohd-ahsan27/Portfolio-Design-React-Tailwind",
+    image: portfolio_img,
+  },
 ];
 
+// Framer Motion Variants
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -50,87 +68,28 @@ const containerVariants = {
 
 const cardVariants = {
   hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0 },
-  hover: { scale: 1.05, boxShadow: "0 8px 20px rgba(255, 211, 89, 0.5)" },
-};
-
-const Modal = ({ show, onClose, project }) => {
-  if (!show) return null;
-
-  return (
-    <AnimatePresence>
-      <motion.div
-        className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        onClick={onClose}
-      >
-        <motion.div
-          className="bg-gray-900 rounded-lg p-6 max-w-lg w-full shadow-lg relative"
-          initial={{ y: "-100vh", opacity: 0 }}
-          animate={{ y: "0", opacity: 1, transition: { delay: 0.2 } }}
-          exit={{ y: "100vh", opacity: 0 }}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <button
-            className="absolute top-3 right-3 text-yellow-400 text-2xl font-bold"
-            onClick={onClose}
-            aria-label="Close modal"
-          >
-            &times;
-          </button>
-
-          <h3 className="text-3xl font-semibold mb-4 text-yellow-400">
-            {project.title}
-          </h3>
-          <img
-            src={project.image}
-            alt={project.title}
-            className="rounded mb-4 w-full object-cover"
-          />
-          <p className="text-gray-300 mb-4">{project.details}</p>
-          <div className="flex flex-wrap gap-2 mb-6">
-            {project.tech.map((tech, i) => (
-              <span
-                key={i}
-                className="bg-gray-700 px-3 py-1 rounded-full font-mono tracking-wide text-sm"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-          {project.link && (
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-6 py-2 rounded-lg shadow-md transition"
-            >
-              🔗 Visit Project
-            </a>
-          )}
-        </motion.div>
-      </motion.div>
-    </AnimatePresence>
-  );
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, type: "spring" } },
 };
 
 const Projects = () => {
   const [selectedTech, setSelectedTech] = useState("All");
-  const [modalProject, setModalProject] = useState(null);
 
   const allTechs = ["All", ...new Set(projects.flatMap((p) => p.tech))];
 
-  const filteredProjects =
+  const filtered =
     selectedTech === "All"
       ? projects
-      : projects.filter((project) => project.tech.includes(selectedTech));
+      : projects.filter((p) => p.tech.includes(selectedTech));
 
   return (
-    <section className="min-h-screen bg-gray-900 text-white px-6 sm:px-16 py-16 flex flex-col items-center">
+    <motion.section
+      className="min-h-screen px-6 sm:px-16 py-16 flex flex-col items-center bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white"
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+    >
       <motion.h2
-        className="text-4xl font-bold text-yellow-400 mb-8 mt-24 sm:mt-28"
+        className="text-4xl font-bold text-cyan-400 mb-10 mt-24 sm:mt-28"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -138,7 +97,7 @@ const Projects = () => {
         My Projects
       </motion.h2>
 
-      {/* Filter Buttons */}
+      {/* Filters */}
       <div className="flex flex-wrap justify-center gap-3 mb-12">
         {allTechs.map((tech) => (
           <button
@@ -146,8 +105,8 @@ const Projects = () => {
             onClick={() => setSelectedTech(tech)}
             className={`px-4 py-2 rounded-full font-semibold transition ${
               selectedTech === tech
-                ? "bg-yellow-400 text-black"
-                : "bg-gray-700 text-gray-300 hover:bg-yellow-500 hover:text-black"
+                ? "bg-cyan-500 text-black"
+                : "bg-gray-700 text-gray-300 hover:bg-cyan-600 hover:text-white"
             }`}
           >
             {tech}
@@ -155,57 +114,58 @@ const Projects = () => {
         ))}
       </div>
 
-      {/* Projects Grid */}
+      {/* Cards */}
       <motion.div
         className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl"
-        initial="hidden"
-        animate="visible"
         variants={containerVariants}
       >
-        {filteredProjects.map((project, index) => (
+        {filtered.map((project) => (
           <motion.div
-            key={index}
-            className="bg-gray-800 rounded-xl p-4 flex flex-col cursor-pointer hover:ring-2 hover:ring-yellow-400 transition"
+            key={project.title}
+            className="rounded-2xl p-6 cursor-pointer backdrop-blur-md transition-all duration-300 border border-white/10 bg-white/5 hover:bg-white/10 hover:shadow-xl hover:shadow-cyan-400/30"
             variants={cardVariants}
-            whileHover="hover"
-            tabIndex={0}
-            onClick={() => setModalProject(project)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") setModalProject(project);
-            }}
           >
             <img
               src={project.image}
               alt={project.title}
-              className="rounded-md mb-4 object-cover h-40 w-full"
+              className="rounded-lg mb-4 object-cover h-48 w-full"
             />
-            <h3 className="text-2xl font-semibold text-white mb-2">
+            <h3 className="text-xl font-semibold text-cyan-300 mb-2">
               {project.title}
             </h3>
-            <p className="text-gray-300 mb-3 flex-grow">
-              {project.description}
-            </p>
-            <div className="flex flex-wrap gap-2 text-sm text-gray-200 mb-3">
-              {project.tech.map((t, i) => (
+            <p className="text-gray-200 mb-4">{project.description}</p>
+            <div className="flex flex-wrap gap-2 mb-4">
+              {project.tech.map((t, j) => (
                 <span
-                  key={i}
-                  className="bg-gray-700 px-2 py-1 rounded-full font-mono"
+                  key={j}
+                  className="text-xs bg-cyan-400/20 text-cyan-200 px-2 py-1 rounded-full font-mono"
                 >
                   {t}
                 </span>
               ))}
             </div>
+            <div className="flex gap-3">
+              <a
+                href={project.demoLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 text-center bg-cyan-600 hover:bg-cyan-800 text-white font-semibold px-3 py-2 rounded-lg shadow transition"
+              >
+                Visit Project
+              </a>
+              <a
+                href={project.codeLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 text-center bg-cyan-600 hover:bg-cyan-800 text-white font-semibold px-3 py-2 rounded-lg shadow transition"
+              >
+                View Code
+              </a>
+            </div>
           </motion.div>
         ))}
       </motion.div>
-
-      {/* Modal */}
-      <Modal
-        show={!!modalProject}
-        onClose={() => setModalProject(null)}
-        project={modalProject}
-      />
-    </section>
+    </motion.section>
   );
 };
 

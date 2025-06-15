@@ -2,26 +2,75 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import CountUp from "react-countup";
-
 import {
-  SiJavascript,
-  SiReact,
-  SiNodedotjs,
-  SiMongodb,
   SiHtml5,
   SiCss3,
+  SiJavascript,
+  SiReact,
+  SiTailwindcss,
+  SiNodedotjs,
+  SiExpress,
+  SiMongodb,
+  SiWordpress,
 } from "react-icons/si";
 
 const skillsData = [
-  { name: "JavaScript", level: 90, color: "bg-yellow-400", icon: <SiJavascript className="text-yellow-400 w-6 h-6" /> },
-  { name: "React.js", level: 85, color: "bg-blue-400", icon: <SiReact className="text-blue-400 w-6 h-6" /> },
-  { name: "Node.js", level: 80, color: "bg-green-500", icon: <SiNodedotjs className="text-green-500 w-6 h-6" /> },
-  { name: "MongoDB", level: 75, color: "bg-emerald-400", icon: <SiMongodb className="text-emerald-400 w-6 h-6" /> },
-  { name: "HTML", level: 95, color: "bg-orange-500", icon: <SiHtml5 className="text-orange-500 w-6 h-6" /> },
-  { name: "CSS", level: 90, color: "bg-blue-600", icon: <SiCss3 className="text-blue-600 w-6 h-6" /> },
+  {
+    name: "HTML5",
+    level: 90,
+    color: "bg-orange-500",
+    icon: <SiHtml5 className="text-orange-500 w-6 h-6" />,
+  },
+  {
+    name: "CSS3",
+    level: 85,
+    color: "bg-blue-600",
+    icon: <SiCss3 className="text-blue-600 w-6 h-6" />,
+  },
+  {
+    name: "JavaScript",
+    level: 80,
+    color: "bg-yellow-400",
+    icon: <SiJavascript className="text-yellow-400 w-6 h-6" />,
+  },
+  {
+    name: "React.js",
+    level: 78,
+    color: "bg-blue-400",
+    icon: <SiReact className="text-blue-400 w-6 h-6" />,
+  },
+  {
+    name: "Tailwind CSS",
+    level: 75,
+    color: "bg-cyan-400",
+    icon: <SiTailwindcss className="text-cyan-400 w-6 h-6" />,
+  },
+  {
+    name: "Node.js",
+    level: 72,
+    color: "bg-green-500",
+    icon: <SiNodedotjs className="text-green-500 w-6 h-6" />,
+  },
+  {
+    name: "Express.js",
+    level: 70,
+    color: "bg-gray-500",
+    icon: <SiExpress className="text-gray-300 w-6 h-6" />,
+  },
+  {
+    name: "MongoDB",
+    level: 68,
+    color: "bg-emerald-400",
+    icon: <SiMongodb className="text-emerald-400 w-6 h-6" />,
+  },
+  {
+    name: "WordPress",
+    level: 75,
+    color: "bg-indigo-500",
+    icon: <SiWordpress className="text-indigo-500 w-6 h-6" />,
+  },
 ];
 
-// Helper function for proficiency categories
 const getProficiency = (level) => {
   if (level >= 85) return "Expert";
   if (level >= 70) return "Intermediate";
@@ -32,20 +81,22 @@ const Skills = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("All");
 
-  // Filter and search skills
   const filteredSkills = skillsData.filter((skill) => {
-    const matchesFilter = filter === "All" || getProficiency(skill.level) === filter;
-    const matchesSearch = skill.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesFilter =
+      filter === "All" || getProficiency(skill.level) === filter;
+    const matchesSearch = skill.name
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
     return matchesFilter && matchesSearch;
   });
 
   return (
-    <section className="relative min-h-screen bg-gray-950 text-white flex flex-col items-center justify-center py-16 px-6 overflow-hidden">
-      {/* Background accent */}
-      <div className="absolute -top-20 left-1/2 transform -translate-x-1/2 w-[500px] h-[500px] rounded-full bg-yellow-400 opacity-10 blur-3xl pointer-events-none"></div>
+    <section className="relative min-h-screen bg-gray-950 text-white flex flex-col items-center justify-center py-16 px-6 overflow-hidden mt-19 ">
+      {/* 🔥 Background Glow Option (can choose later) */}
+      <div className="absolute -top-32 left-1/2 transform -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-gradient-radial from-gray-800 via-purple-900 to-black opacity-20 blur-3xl pointer-events-none z-0"></div>
 
       <motion.h2
-        className="text-4xl font-bold mb-8 text-yellow-400 z-10"
+        className="text-4xl sm:text-5xl font-extrabold mb-12 text-cyan-400 z-10 text-center pt-12"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -53,8 +104,7 @@ const Skills = () => {
         My Skills
       </motion.h2>
 
-      {/* Search & Filter Controls */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between w-full max-w-3xl mb-12 gap-4 z-10">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between w-full max-w-4xl mb-10 gap-4 z-10">
         <input
           type="text"
           placeholder="Search skills..."
@@ -76,43 +126,42 @@ const Skills = () => {
         </select>
       </div>
 
-      {/* Skills List */}
-      <div className="w-full max-w-3xl space-y-8 z-10">
-        {filteredSkills.length === 0 && (
-          <p className="text-center text-gray-400 italic">No skills found.</p>
+      <div className="w-full max-w-5xl grid gap-6 sm:grid-cols-2 z-10">
+        {filteredSkills.length === 0 ? (
+          <p className="text-center text-gray-400 italic col-span-full">
+            No skills found.
+          </p>
+        ) : (
+          filteredSkills.map((skill, index) => (
+            <motion.div
+              key={skill.name}
+              className="flex items-center space-x-4 bg-gray-900 border border-gray-800 rounded-lg p-4 shadow-md hover:shadow-yellow-400/50 transition"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1, type: "spring", stiffness: 100 }}
+              whileHover={{ scale: 1.03 }}
+            >
+              <div>{skill.icon}</div>
+
+              <div className="flex-1">
+                <div className="flex justify-between mb-2">
+                  <span className="text-lg font-semibold">{skill.name}</span>
+                  <span className="text-sm text-gray-300">
+                    <CountUp end={skill.level} duration={1.5} suffix="%" />
+                  </span>
+                </div>
+                <div className="w-full bg-gray-700 rounded-full h-3">
+                  <motion.div
+                    className={`h-3 rounded-full ${skill.color}`}
+                    initial={{ width: 0 }}
+                    animate={{ width: `${skill.level}%` }}
+                    transition={{ duration: 1.5, ease: "easeOut" }}
+                  />
+                </div>
+              </div>
+            </motion.div>
+          ))
         )}
-
-        {filteredSkills.map((skill, index) => (
-          <motion.div
-            key={skill.name}
-            className="w-full flex items-center space-x-4 bg-gray-900 rounded-lg p-4 shadow-lg hover:shadow-yellow-400/60 transition cursor-default"
-            initial={{ opacity: 0, x: -80 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: index * 0.25, type: "spring", stiffness: 100 }}
-            whileHover={{ scale: 1.03 }}
-          >
-            {/* Icon */}
-            <div>{skill.icon}</div>
-
-            {/* Skill info */}
-            <div className="flex-1">
-              <div className="flex justify-between mb-2">
-                <span className="text-lg font-semibold text-white">{skill.name}</span>
-                <span className="text-sm text-gray-300">
-                  <CountUp end={skill.level} duration={1.5} suffix="%" />
-                </span>
-              </div>
-              <div className="w-full bg-gray-700 rounded-full h-5">
-                <motion.div
-                  className={`h-5 rounded-full ${skill.color}`}
-                  initial={{ width: 0 }}
-                  animate={{ width: `${skill.level}%` }}
-                  transition={{ duration: 1.5, ease: "easeOut" }}
-                />
-              </div>
-            </div>
-          </motion.div>
-        ))}
       </div>
     </section>
   );

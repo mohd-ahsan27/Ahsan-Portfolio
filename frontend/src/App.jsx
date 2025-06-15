@@ -1,37 +1,40 @@
-
-// Portfolio
+// App.jsx
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "./Portfolio/Navbar";
 import Footer from "./Portfolio/Footer";
 
 import Home from "./Portfolio/Pages/Home";
 import About from "./Portfolio/Pages/About";
-import Skills from "./Portfolio/pages/Skills";
-import Projects from "./Portfolio/pages/Projects";
-
-import Contact from "./Portfolio/pages/Contact";
+import Skills from "./Portfolio/Pages/Skills";
+import Projects from "./Portfolio/Pages/Projects";
+import Contact from "./Portfolio/Pages/Contact";
 
 function App() {
   return (
-    <BrowserRouter>
+    <div className="bg-white text-black">
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/About" element={< About />} />
-        <Route path="/Skills" element={< Skills />} />
-        <Route path="/Contact" element={< Contact />} />
-        <Route path="/Projects" element={< Projects />} />
-      </Routes>
+
+      {/* Sections now inline on one page */}
+      <section id="home">
+        <Home />
+      </section>
+      <section id="about">
+        <About />
+      </section>
+      <section id="skills">
+        <Skills />
+      </section>
+      <section id="projects">
+        <Projects />
+      </section>
+      <section id="contact">
+        <Contact />
+      </section>
+
       <Footer />
-    </BrowserRouter>
+    </div>
   );
 }
 
 export default App;
-
-
-
-
-

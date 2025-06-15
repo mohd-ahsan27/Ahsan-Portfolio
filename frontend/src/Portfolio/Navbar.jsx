@@ -1,40 +1,38 @@
-// src/components/Navbar.jsx
+// Navbar.jsx
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { HiMenu, HiX } from "react-icons/hi";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const links = [
-    { to: "/", label: "Home" },
-    { to: "/about", label: "About" },
-    { to: "/skills", label: "Skills" },
-    { to: "/projects", label: "Projects" },
-    { to: "/contact", label: "Contact" },
+    { href: "#home", label: "Home" },
+    { href: "#about", label: "About" },
+    { href: "#skills", label: "Skills" },
+    { href: "#projects", label: "Projects" },
+    { href: "#contact", label: "Contact" },
   ];
 
   return (
     <nav className="bg-gray-900 text-white shadow-md fixed top-0 w-full z-50">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        {/* Logo with gradient text */}
-        <Link
-          to="/"
-          className="text-3xl font-extrabold uppercase tracking-tight bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent drop-shadow-md hover:brightness-110 transition duration-300"
+        {/* Logo with cyan gradient */}
+        <span
+          className="text-3xl font-extrabold uppercase tracking-tight bg-gradient-to-r from-cyan-400 via-cyan-300 to-cyan-500 bg-clip-text text-transparent drop-shadow-md hover:brightness-110 transition duration-300"
         >
-          MonthaHaider
-        </Link>
+          Mohd Ahsan
+        </span>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex space-x-8 text-sm font-semibold">
+        <div className="hidden md:flex space-x-4 text-md">
           {links.map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              className="text-gray-300 hover:text-yellow-400 transition duration-200"
+            <a
+              key={link.label}
+              href={link.href}
+              className="text-gray-300 px-3 py-2 rounded-md hover:bg-cyan-500 hover:text-white hover:shadow-md transition duration-200 cursor-pointer"
             >
               {link.label}
-            </Link>
+            </a>
           ))}
         </div>
 
@@ -43,7 +41,7 @@ const Navbar = () => {
           <button
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
-            className="text-yellow-400 text-3xl focus:outline-none hover:text-yellow-300 transition duration-200"
+            className="text-cyan-400 text-3xl focus:outline-none hover:text-cyan-300 transition duration-200"
           >
             {isOpen ? <HiX /> : <HiMenu />}
           </button>
@@ -54,14 +52,14 @@ const Navbar = () => {
       {isOpen && (
         <div className="md:hidden bg-gray-900 px-6 pb-6 space-y-3 text-sm font-semibold">
           {links.map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
+            <a
+              key={link.label}
+              href={link.href}
               onClick={() => setIsOpen(false)}
-              className="block text-gray-300 hover:text-yellow-400 transition duration-200"
+              className="block text-gray-300 hover:text-cyan-400 transition duration-200 cursor-pointer"
             >
               {link.label}
-            </Link>
+            </a>
           ))}
         </div>
       )}
