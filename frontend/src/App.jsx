@@ -1,14 +1,14 @@
 // App.jsx
 import React from "react";
 
-import Navbar from "./Portfolio/Navbar";
-import Footer from "./Portfolio/Footer";
+import Navbar from "./Portfolio/pages/Navbar";
 
 import Home from "./Portfolio/Pages/Home";
 import About from "./Portfolio/Pages/About";
 import Skills from "./Portfolio/Pages/Skills";
 import Projects from "./Portfolio/Pages/Projects";
 import Contact from "./Portfolio/Pages/Contact";
+import Footer from "./Portfolio/pages/Footer";
 
 function App() {
   return (
