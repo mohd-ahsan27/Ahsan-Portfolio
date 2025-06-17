@@ -1,7 +1,6 @@
 // src/pages/Contact.jsx
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import {
   FaEnvelope,
   FaLinkedin,
@@ -25,15 +24,34 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    // You can integrate backend logic or EmailJS here
+
+    try {
+      const res = await fetch("http://localhost:5000/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        alert("✅ Message sent successfully!");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        alert("❌ " + (data.error || "Failed to send message."));
+      }
+    } catch (err) {
+      alert("❌ Error sending message. Check console.");
+      console.error("Submit Error:", err);
+    }
   };
 
   return (
     <section className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white flex flex-col items-center justify-center px-6 py-20">
-      <motion.h2 
+      <motion.h2
         className="text-5xl font-bold text-cyan-400 mb-10 text-center pt-4"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -95,7 +113,7 @@ const Contact = () => {
           </motion.button>
         </form>
 
-        {/* Social Links in Row */}
+        {/* Social Links */}
         <motion.div
           className="mt-10 text-center text-gray-400 text-sm"
           initial={{ opacity: 0 }}
@@ -106,7 +124,6 @@ const Contact = () => {
             <p className="flex items-center gap-2">
               <FaEnvelope className="text-cyan-500" />
               <a
-              
                 href="mailto:ahsanbinrauf27@gmail.com"
                 className="hover:underline text-cyan-300"
               >
@@ -121,7 +138,7 @@ const Contact = () => {
                 rel="noopener noreferrer"
                 className="hover:underline text-blue-300"
               >
-                linkedin.com/in/mohd-ahsan
+                linkedin.com/in/muhammad-ahsan
               </a>
             </p>
             <p className="flex items-center gap-2">
@@ -132,12 +149,12 @@ const Contact = () => {
                 rel="noopener noreferrer"
                 className="hover:underline text-gray-200"
               >
-                github.com/muhammad-ahsan
+                github.com/mohd-ahsan27
               </a>
             </p>
           </div>
 
-          {/* Contact Number */}
+          {/* Contact Info */}
           <div className="mt-6 flex flex-wrap justify-center items-center text-gray-300 gap-4">
             <div className="flex items-center gap-2">
               <ImPhone className="text-green-400" />
