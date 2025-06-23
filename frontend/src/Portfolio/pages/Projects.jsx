@@ -5,6 +5,7 @@ import ttt_img from "../Portfolio-Images/tic-tac-toe-img.png";
 import rps_img from "../Portfolio-Images/rock-paper-scissors.jfif";
 import seg_img from "../Portfolio-Images/email-generator.png";
 import portfolio_img from "../Portfolio-Images/portfolio-img.jfif";
+import coming_soon from "../Portfolio-Images/coming soon.jfif";
 
 // Projects Data
 const projects = [
@@ -53,6 +54,18 @@ const projects = [
     codeLink: "https://github.com/mohd-ahsan27/Portfolio-Design-React-Tailwind",
     image: portfolio_img,
   },
+
+{
+  title: "New Project Coming Soon...!",
+  description:
+    "Currently working on a full-stack project that will showcase advanced frontend and backend integration. It will include a modern UI, responsive layout, and real-world features. Full details, live demo, and source code will be available soon!",
+  tech: ["React", "Tailwind CSS", "MERN Stack"],
+  demoLink: "",
+  codeLink: "",
+  image: coming_soon,
+}
+
+
 ];
 
 // Framer Motion Variants
